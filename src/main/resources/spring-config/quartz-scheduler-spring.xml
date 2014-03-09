@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+      
+	<!-- Creates a Quartz scheduler for WebSphere using the standard classes from Spring and Quartz. -->
+
+	<bean id="quartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+		<property name="jobFactory">
+			<bean class="org.springframework.scheduling.quartz.SpringBeanJobFactory" />
+		</property>
+		<property name="schedulerName" value="quartz-websphere-spring" />
+		<property name="taskExecutor" ref="taskExecutor" />
+		<property name="waitForJobsToCompleteOnShutdown" value="true" />
+		<property name="quartzProperties">
+			<props>
+				<prop key="org.quartz.jobStore.class">org.quartz.simpl.RAMJobStore</prop>
+				<prop key="org.quartz.scheduler.instanceId">AUTO</prop>
+				<prop key="org.quartz.scheduler.skipUpdateCheck">true</prop>
+				<prop key="org.quartz.threadExecutor.class">com.gybas.evaluation.quartz.setup.WorkManagerThreadExecutor</prop>
+				<prop key="org.quartz.threadExecutor.workManagerName">wm/default</prop>
+			</props>
+		</property>
+	</bean>
+</beans>

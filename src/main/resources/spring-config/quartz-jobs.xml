@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+      
+	<!-- Defines and registers the Quartz jobs. -->
+
+   <bean id="userTransactionLookup" class="com.gybas.evaluation.quartz.jobs.UserTransactionLookup">
+   	<constructor-arg>
+   		<bean class="org.springframework.jndi.JndiTemplate" />
+   	</constructor-arg>
+   </bean>
+   
+   <bean id="userTransactionLookupJobRegistrar" class="com.gybas.evaluation.quartz.jobs.UserTransactionLookupJobRegistrar">
+   	<property name="scheduler" ref="quartzScheduler" />
+   	<property name="totalCount" value="5" />
+   </bean>
+</beans>

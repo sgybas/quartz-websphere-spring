@@ -1,0 +1,15 @@
+<!-- There's no schema, see http://stackoverflow.com/questions/5731162/xml-schema-or-dtd-for-logback-xml -->
+<configuration debug="true">
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="org.quartz" level="INFO" />
+	<logger name="org.springframework" level="INFO" />
+
+	<root level="debug">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>
